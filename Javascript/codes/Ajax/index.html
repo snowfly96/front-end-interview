@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="bnt">显示图片</button>
+    <img src="" alt="" style="height: 200px; width: 200px;">
+</body>
+<script>
+    const bnt=document.querySelector("button")
+    const img=document.querySelector("img")
+
+    function ajaxPromise(params) {
+        let p=new Promise((resolve,reject)=>{
+            let xhr=new XMLHttpRequest()
+            xhr.open("get","panda.jpg",true) // true表示执行异步操作
+            xhr.onreadystatechange=()=>{
+                if(xhr.readyState==4){ // 0-请求初始化，1-请求建立但未发送，2-请求发送正在处理（一般可获取响应头内容），3-请求处理中，部分数据可用，4-请求处理完成
+                    if(xhr.status>=200&&xhr.status<300||xhr.status==304){
+                        resolve(xhr.responseURL)
+                    }
+                    else{
+                        reject(new Error(xhr.statusText))
+                    }
+                }
+            }
+            xhr.send(null)
+        })
+        return p
+    }
+
+
+    bnt.onclick=()=>{
+        ajaxPromise()
+            .then(responseURL=>{
+                img.src=responseURL
+            })
+            .catch(statusText=>{
+                console.log(statusText);
+            })
+    }
+</script>
+</html>
