@@ -1,4 +1,4 @@
-# :desktop_computer:  Front-End-Interview
+# :desktop_computer:  前端实习面试总结
 前端实习面试收集的一些复习笔记和资料，包含**部分**计算机基础、前端基础和前端进阶等知识，涉及到常见面试问题和自己没掌握好的知识点问题。
 
 
