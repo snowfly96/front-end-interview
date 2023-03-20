@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">click me!</button>
+</body>
+<script>
+    /*
+    1. 什么是回调函数？
+        * 自定义的函数
+        * 自己没有调用
+        * 最终执行了
+    2. 常见的回调函数
+        * dom事件回调函数
+        * 定时器回调函数
+        * ajax回调函数
+        * 生命周期回调函数
+    */
+    var btn=document.getElementById("btn");
+    btn.onclick=function(){
+        alert(this.innerText);
+    };
+    // 超时定时器，还有循环定时器
+    setTimeout(function () {
+        console.log("2s show");
+    },2000);
+</script>
+</html>

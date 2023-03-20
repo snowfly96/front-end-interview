@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script type="text/javascript">
+    /*
+        函数对象
+    */
+    function Person(name,age){
+        this.name=name;
+        this.age=age;
+        this.behavior=function(){
+            console.log("this is behavior function!");
+        }
+    }
+    var snow=new Person("snow",27);
+    snow.behavior();
+    console.log(snow.__proto__===Person.prototype);
+
+    // null与undefined区别
+    // undefined 属于为定义的变量，null暗示将要被赋值为一个对象，先占一个坑
+    // null：初始化赋值表示即将被赋值为对象，表明对象将成为垃圾进行内存回收
+
+    /*
+        引用变量赋值：通过另外一个引用变量修改内部对象的值
+        两个引用变量其中一个指向了不同的对象之后，另一个依旧指向原来的对象
+    */
+   var obj1={name:"tom"};
+   var obj2=obj1;
+   obj1.name="snow";
+   console.log(obj1.name);
+    function fn(obj) {
+        obj.name="hello";
+    }
+    fn(obj1);
+    console.log(obj2.name);
+
+    var a={age:12};
+    var b=a;
+    a={name:"B",age:13};
+    console.log(b.age,a.name,a.age); // 12, B, 13
+
+    function fn2(obj) { // obj和a指向{name:"B",age:13}
+        obj={age:15}; // obj与{name:"B",age:13}断开，重新指向{age:15}，不修改a
+    }
+    fn2(a);
+    console.log(a.age);// 13
+
+    // 变量传递参数
+    console.log("--------变量传递参数--------");
+    var a=3;
+    function fn(a) {
+        a=a+1;
+    }
+    fn(a);
+    console.log(a);
+
+    /* JS如何进行内存管理
+        1. 内存生命周期
+            *分配小的内存空间，得到使用权
+            *存储数据，可以反复进行操作
+            *释放小内存空间
+        2. 释放内存
+    */
+
+   /* 调用函数的方法
+        1.test() 直接调用
+        2.obj.test() 对象调用
+        3.new test() new调用
+        4.test.call(obj)/test.apply(obj) 修改this指向
+   */
+</script>
+</html>

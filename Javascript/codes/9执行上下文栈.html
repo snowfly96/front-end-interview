@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /* 
+    1. 在全局代码执行前，JS引擎会创建一个栈来管理左右的执行上下文对象
+    2. 全局执行上下文（window）确定之后，将其添加到栈中
+    3. 在函数执行上下文创建之后，将其添加到栈中
+    4. 函数执行完毕之后，将其从栈顶对象出栈
+    5. 当前所有代码执行完毕之后，只剩下window对象
+     */
+    // 1. 进入全局执行上下文
+    var a=10
+    var bar=function(x){
+        var b=5
+        foo(x+b) // 3. 执行foo珍惜那个上下文
+    }
+    var foo=function(y){
+        var c=5
+        console.log(a+c+y);
+    }
+    bar(10) // 2. 进入bar执行上下文
+
+    // 面试题
+    console.log(i);
+    var i=1
+    foo2(1)
+
+    function foo2(i) {
+        if(i==4){
+            return 
+        }
+        console.log("fb:"+i);
+        foo2(i+1)
+        console.log("fe:"+i);
+    }
+    console.log(i);
+
+    /* output:
+    undefined
+    fb:1
+    fb:2
+    fb:3
+    fe:3
+    fe:2
+    fe:1
+    1
+     */
+
+    // 先执行变量提升，在执行函数提升
+    function a4(){}
+    var a4
+    console.log(typeof a4);
+
+    // 面试题
+    var c=1;
+    function c(c){
+        console.log(c);
+    }
+    c(2) // c是一个变量，先变量提升和函数提升，再执行c=1
+</script>
+</html>

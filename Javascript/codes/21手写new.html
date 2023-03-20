@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function mnew(className){
+        let obj={}
+        obj.__proto__=className.prototype
+        let args=Array.from(arguments).slice(1)
+        let res=className.call(obj,...args)
+        return res=="Object"?res:obj
+    }
+    function Person(name,age){
+        this.name=name
+        this.age=age
+    }
+    let p=mnew(Person,"snow",27)
+    console.log(p);
+
+</script>
+</html>

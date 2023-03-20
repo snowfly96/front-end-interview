@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="input data" id="number">
+    <button id="btn"></button>
+</body>
+<script>
+    /* 定时器
+        1. 定时器真的是定时执行么？
+            * 定时器并不会真正执行
+            * 一般会延迟一点，也可能延迟较长时间、
+        2. 定时器回调函数实在分线程执行么？
+            * 在主线程执行的，js是单线程的
+        3. 定时器如何实现呢？
+            * 事件循环模型
+     */
+
+    /* js是单线程执行的
+        * 分为初始化代码和回调代码
+            * 回调代码：定时器、绑定事件监听、ajax请求
+        * 初始化代码执行完之后才执行回调代码
+     */
+    setTimeout(function(){
+        console.log("timeout 2");
+    },2000)
+    setTimeout(function(){
+        console.log("timeout 1");
+    },2000)
+    function fn(params) {
+        console.log("hello");
+    }
+    fn()
+    console.log("alter执行之前");
+    // alert("------") // 暂停主线程和计时器
+    console.log("alter执行之后");
+
+    /* 事件循环模型
+     */
+
+    /* web workers html5解决js单线程的问题，提出js多线程方案
+     */
+    /* worker.js 分线程中this不是window时worker的一个全局对象
+    function fn(n){
+        return n<=2?1:fn(n-1)+fn(n-2)
+    }  
+    var ommessage=function(event){
+        var val=event.data
+        console.log("分线程接收到主线程接收到的数据");
+        var res=fn(val)
+        postMessage(res) 
+    }
+    有很多问题：
+        不能访问DOM，全局对象不是window
+        不是每份浏览器都支持这个新特性
+     */
+    var input=document.getElementById("number")
+    document.getElementById("btn").onclick=function(){
+        var val=input.value;
+        // 创建worker
+        var worker=new Worker("woker.js")
+        // 主线程接收数据
+        worker.onmessage=function(event){
+            console.log("主线程接收分线程返回的数据")
+            alert(event.data)
+        }
+        // 向分线程传递数据
+        worker.postMessage(val)
+        console.log("向分线程传递数据数据")
+    }
+
+</script>
+
+</html>

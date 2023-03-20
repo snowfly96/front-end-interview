@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /* 
+    1. 作用域是编写代码的之后就产生的（静态的），上下文是代码执行之后产生的（动态的）
+    https://www.bilibili.com/video/BV14s411E7qf?p=27&vd_source=084728306193898208d80f40ece2975b
+    作用域作用：
+        * 隔离变量，不同作用域下的变量不会互相影响
+     */
+    // 面试题，代码执行之前就确定了
+    var x=10;
+    function fn(x) {
+        console.log(x);
+    }
+    function show(f) {
+        var x=20
+        f()
+    }
+    show(fn) // 输出10，代码执行前确定的
+
+    // 面试题2
+    var fn=function(){
+        console.log(fn);
+    }
+    fn() // fn()
+
+    var obj={
+        fn2:function(){
+            console.log(fn2); // 要在obj找需要使用this.fn2
+        }
+    }
+    obj.fn2()  // 找不到，报错
+
+
+</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 深拷贝
+    let obj = {
+        name: "coderqian",
+        hobby: {
+            outdoor: "basketball",
+            indoor: "watch mv",
+        },
+    };
+
+    function deepClone(obj){
+        let newObj={};
+        for(let i in obj){
+            if(typeof obj[i]==="Object"){
+                newObj[i]=deepClone(obj[i])
+            }
+            else{
+                newObj[i]=obj[i]
+            }
+        }
+        return newObj
+    }
+    let newObj=deepClone(obj)
+    console.log(newObj);
+
+    // 浅拷贝
+    let obj2=obj;
+    console.log(obj2);
+
+    let obj3={}
+    Object.assign(obj3,obj)
+</script>
+</html>

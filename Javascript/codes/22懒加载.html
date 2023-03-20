@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            height: 600px;
+            width: 400px;
+            display: block;
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+    <img data-src="./portrait.png" alt="" lazyload="true">
+    <img data-src="./portrait.png" alt="" lazyload="true">
+    <img data-src="./portrait.png" alt="" lazyload="true">
+    <img data-src="./portrait.png" alt="" lazyload="true">
+    <img data-src="./portrait.png" alt="" lazyload="true">
+    <img data-src="./portrait.png" alt="" lazyload="true">
+    <img data-src="./portrait.png" alt="" lazyload="true">
+    <img data-src="./portrait.png" alt="" lazyload="true">
+</body>
+<script>
+    function checkElement(element) {
+      const viewWidth = window.innerWidth || document.documentElement.clientWidth
+      const viewHeight = window.innerHeight || document.documentElement.clientHeight
+      const {
+        top,
+        right,
+        bottom,
+        left,
+      } = element.getBoundingClientRect() || {}
+      return (
+        top >= 0 &&
+        bottom <= viewHeight &&
+        left >= 0 &&
+        right <= viewWidth
+      )
+    }
+    function lazyload() {
+      var eles = document.querySelectorAll('img[data-src][lazyload]')
+      Array.prototype.forEach.call(eles, function (el, index) {
+        var rect
+        if (el.getAttribute("data-src") === "") // el.dataset.src
+          return
+        if (checkElement(el)) {
+            // var img = new Image()
+            // img.src = el.dataset.src
+            // img.onload = function () {
+            //   el.src = img.src
+            // }
+            el.src = el.dataset.src
+            el.removeAttribute("data-src") //移除属性，下次不再遍历
+            el.removeAttribute("lazyload")
+        }
+      })
+    }
+    lazyload()//刚开始还没滚动屏幕时，要先触发一次函数，初始化首页的页面图片
+    document.addEventListener("scroll", lazyload)
+</script>
+</html>

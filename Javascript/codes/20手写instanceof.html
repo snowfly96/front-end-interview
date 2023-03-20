@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function mInstanceof(instance,target){
+        let pointer=instance
+        while(pointer){
+            if(pointer==target.prototype){
+                return true
+            }
+            else{
+                pointer=pointer.__proto__
+            }
+        }
+        return false
+    }
+    let obj={}
+    let res=mInstanceof(obj,Object)
+    console.log(res);
+</script>
+</html>

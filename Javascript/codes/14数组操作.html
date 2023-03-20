@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 1. 数组的flat操作
+    let res=[]
+    function flat(arr) {
+        for(let i=0; i<arr.length; i++){
+            if(Array.isArray(arr[i])){
+                flat(arr[i])
+            }
+            else{
+                res.push(arr[i])
+            }
+        }
+        return res
+    }
+    var testArr=[1,2,3,[3,4,5],[2,4]]
+    var flatArr=flat(testArr);
+    console.log(flatArr);
+
+    // 2. reduce实现
+    var testSum=flatArr.reduce((pre,cur)=>{return pre+cur})
+    console.log(testSum);
+    var reversedArr=flatArr.reduce((pre,cur)=>{return [cur,...pre]},[])
+    console.log(reversedArr);
+    // pre,cur,idx,arr
+    Array.prototype.myReduce = function(callback,init) {
+        for(let i=0;i<this.length;i++){
+            if(typeof init==="undefined"){
+                init=callback(this[i],this[i+1],i+1,this)
+                ++i
+            }else{
+                init=callback(init,this[i],i,this)
+            }
+        }
+        return init
+    }
+    var reversedArr=flatArr.myReduce((pre,cur)=>{return [cur,...pre]},[])
+    console.log(reversedArr);
+
+    // 3. 去重复
+    // 3.1 set+...
+    console.log([...new Set(flatArr)]);
+    // 3.2 遍历
+    let tempArr=[]
+    for(let i=0;i<flatArr.length;i++){
+        if(!tempArr.includes(flatArr[i])){
+            tempArr.push(flatArr[i])
+        }
+    }
+    console.log(tempArr);
+    // 3.3 reduce
+    let tempArr2=flatArr.reduce((pre,cur)=>{
+        return pre.includes(cur)?pre:pre.concat(cur)
+    },[])
+    console.log(tempArr2);
+    // 3.4 filter 操作
+
+</script>
+</html>

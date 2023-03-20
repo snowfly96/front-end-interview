@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    console.log(Date.prototype, typeof Date.prototype); // 原型上面的方法是给实例对象进行使用的
+    function Person(name,age){
+        this.name=name;
+        this.age=age;
+        
+    }
+    Person.prototype.test=function(){
+        console.log("给原型对象中动态添加方法");
+    }
+    // 李立超老师：https://www.bilibili.com/video/BV1YW411T7GX/?spm_id_from=333.788.recommend_more_video.1&vd_source=084728306193898208d80f40ece2975b
+    // https://www.bilibili.com/video/BV14s411E7qf?p=20&vd_source=084728306193898208d80f40ece2975b
+    // 原型对象相当于一个公共的区域，构造函数和实例都能访问
+    /* 函数的prototype：函数作为构造函数时才有用
+        * 每个函数都有一个prototype属性，它默认指向一个object空对象（原型对象）
+        * 原型对象有一个属性constructor（构造方法），他指向函数对象
+        * 函数对象的prototype指向函数的原型对象，原型对象中的的构造函数反过来指向函数对象
+    */
+    console.log(Person);
+    console.log(Person.prototype)
+    console.log(Person.constructor===Person)
+    console.log(Person.prototype.constructor===Person)
+
+    /* 对象__proto__
+        * 每个实例对象都有一个__proto__属性，指向其构造函数的prototype
+        * 当访问一个对象的属性或方法时现在自身找，没有再往原型对象找，一层层往上找，知道找到最后一个null原型，构成原型链的根节点
+        * 查看某个对象有某个方法（会在原型链上找），“name” in obj
+        * 只查看自身是否存在某个方法：obj.hasOwnProperty()
+    */
+</script>
+</html>

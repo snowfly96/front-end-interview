@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function sendajax() {
+    // 1、 初始化xhr对象
+    const xhr=null
+    if (window.XMLHttpRequest) {
+        xhr=new XMLHttpRequest();
+    } else {
+        xhr=new ActiveXObject("Microsoft.XMLHTTP")
+    }
+    //  2、 建立连接 设置请求方法和url
+    xhr.open("get", "./data.json");
+    //   3、发送请求
+    xhr.send();
+    //   4、状态改变时 进行回调
+    xhr.onreadystatechange = function () {
+        // readyState 有0-4 五个值
+        // 0 代表 未初始化 1 代表 初始化成功 2 代表发送请求
+        // 3 代表返回了部分数据 4 代表返回了全部数据
+        if (xhr.readyState == 4) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                //   进行成功的操作
+                console.log(xhr.responseText);
+            }
+        }
+    };
+}
+sendajax();
+
+    
+</script>
+</html>

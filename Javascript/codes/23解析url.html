@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let url="https://www.google.com/search?q=hello&newwindow=1&rlz=1C5CHFA_enUS988US988&sxsrf=AJOqlzVB"
+    let parseUrl=(url)=>{
+        let mJson={}
+        let arr=url.substr(url.indexOf('?')+1).split('&')
+        arr.forEach(elem => {
+            let temp=elem.split('=')
+            mJson[temp[0]]=temp[1]
+        });
+        return mJson
+    }
+    console.log(parseUrl(url));
+    
+</script>
+</html>

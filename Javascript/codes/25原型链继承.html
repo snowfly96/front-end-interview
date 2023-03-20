@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 1. 类继承
+    class Animal {
+        constructor(name,age){
+            this.name=name
+            this.age=age
+        }
+        getName(){
+            return this.name
+        }
+        getAge(){
+            return this.age
+        }
+        setName(name){
+            this.name=name
+        }
+        setAge(age){
+            this.age=age
+        }
+    }
+    class Dog extends Animal{
+        constructor(name,age,color){
+            super(name,age)
+            this.color=color
+        }
+        getColor(){
+            return this.color
+        }
+    }
+    let tom=new Dog("Tom",12,"yellow")
+    console.log(tom.getName(),tom.getAge(),tom.getColor());
+
+    console.log(tom.constructor.prototype);
+    console.log(Dog.prototype);
+
+    let cat=new Animal("Cat",10)
+    console.log(cat.__proto__);
+    // 2. 函数继承
+
+    function Person(name,age) {
+        this.name=name
+        this.age=age
+        this.getName=function(){
+            return this.name
+        }
+        this.getAge=function(){
+            return this.age
+        }
+    }
+    function Student(name,age,weight){
+        Person.call(this,name,age)
+        this.weight=weight
+        this.getWeight=function(){
+            return this.weight
+        }
+    }
+    function Teacher(sex){
+        this.sex=sex
+        this.getSex=function(){
+            return this.sex
+        }
+    }
+    let xiaoming=new Student("xiaoming",23,123)
+    console.log(xiaoming.getName(),xiaoming.getAge(),xiaoming.getWeight());
+
+    Teacher.prototype=new Person("张三",32)
+    let zhangsan=new Teacher("男")
+    console.log(zhangsan.getName(),zhangsan.getAge(),zhangsan.getSex());
+</script>
+</html>

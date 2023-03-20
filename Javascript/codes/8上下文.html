@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /* 
+    1. 代码分类
+        * 全局代码
+        * 函数代码
+    2. 全局执行上下文
+        * 执行全局代码之前将windwo确定为全局执行上下文
+        * 对全局数据预处理
+            * 将var定义的变量进行提升，添加到window下，设置为undefined
+            * 将声明的全局函数进行赋值，添加到window属性中
+            * 将this赋值给window
+    3. 函数执行上下文
+        * 在调用函数，准备执行之前，创建一个函数执行上下文对象
+        * 对局部变量进行预处理
+            * 形参变量=》赋值给实参=》添加到函数上下文中
+            * var定义的局部变量，进行变量提升，添加为函数执行上下文变量undefined
+            * this指向赋值给调用函数的对象
+            * arguments赋值给实际参数列表，添加为函数的上下文中
+            * function赋值为fn，添加大上下文中
+     */
+    // 全局执行上下文
+    console.log(a1,window.a1)
+    window.a2
+    console.log(this)
+
+    var a1=3
+    function fn() {
+        console.log("fn()")
+    }
+    console.log(a1,window.a1)
+
+    // 函数执行上下文
+    function fn2(a1){
+        console.log(a1) // 2
+        console.log(a2) // undefined
+        a3() // a3()
+        console.log(this) // window
+        console.log(arguments); // 伪数组（2，3）
+
+        var a2=4
+        function a3() {
+            console.log("a3()");
+        }
+    }
+    fn2(2,3)
+</script>
+</html>

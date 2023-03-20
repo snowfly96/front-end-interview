@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+        <button id="btn">click me!</button>
+    </div>
+</body>
+<script>
+    let btn=document.getElementById("btn")
+    btn.onclick=function(){
+        let async1=new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve("第一个接口数据")
+            },800)
+        })
+        let async2=new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve("第二个接口数据")
+            },800)
+        })
+        Promise
+        .all([async1,async2])
+        .then((value)=>{
+            console.log(...value, "返回所有结果");
+        })
+    }
+</script>
+</html>
