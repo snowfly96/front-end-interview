@@ -45,7 +45,7 @@
 > 5. Heapreplace(heap,item) 删除堆中的一个最小元素并加入一个元素
 > 6. merge(*iterables) 合并多个有序列表，并返回有序列表的迭代器（需要手动list）
 > 7. nlargest(n,iterable,key) 返回最大的n个数的列表
-> 8. Smallest(n,iterable,key) 返回最小的n个数的列表
+> 8. nsmallest(n,iterable,key) 返回最小的n个数的列表
 
 **queue**
 

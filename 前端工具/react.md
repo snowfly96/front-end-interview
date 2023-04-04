@@ -120,7 +120,60 @@
 
 #### redux是什么？
 
-> action-用于描述发生了什么事情的对象
+> action-用于描述组件发生什么动作的对象
 > reducer-一个确定一项将如何变化的的地方
 > store-这个那个程序的状态/对象树保存在store
 > view-只显示store提供的数据
+
+
+
+#### react中函数组件的this问题？
+
+> react的函数组件是一种没有实例的组件，所以也不存在this这一说
+>
+> 需要对函数组件进行state和props进行访问的时候可以通过参数来访问，或者通过setState将参数勾进函数内部
+
+
+
+#### react生命周期
+
+> React 的生命周期指的是组件从被创建、到更新、再到销毁的整个过程，它被分为三个阶段：
+>
+> 1. Mounting（挂载）：组件第一次被创建并添加到 DOM 中时的过程。
+> 2. Updating（更新）：组件重新渲染并更新到 DOM 中时的过程。
+> 3. Unmounting（卸载）：组件从 DOM 中移除时的过程。
+>
+> 下面是每个阶段的生命周期方法：
+>
+> **Mounting阶段**
+>
+> 1. constructor(props)：组件创建时调用，用于初始化状态和绑定成员函数等操作。
+> 2. static getDerivedStateFromProps(props, state)：静态方法，组件创建和更新时调用，用于根据传入的 props 来更新 state，返回一个新的 state 或者返回 null 表示不需要更新 state。
+> 3. render()：组件创建和更新时调用，返回 React 元素（JSX）。
+> 4. componentDidMount()：组件被创建并添加到 DOM 中后调用，可以在这个方法中进行网络请求等操作。
+>
+> **Updating 阶段**
+>
+> 1. static getDerivedStateFromProps(props, state)：同上述。
+> 2. shouldComponentUpdate(nextProps, nextState)：在组件更新前调用，用于判断是否需要更新组件，返回 true 表示更新组件，返回 false 表示不更新。
+> 3. render()：同上述。
+> 4. getSnapshotBeforeUpdate(prevProps, prevState)：在 render() 方法执行后，组件更新前调用，用于获取组件更新前的 DOM 状态，返回一个快照（snapshot）。
+> 5. componentDidUpdate(prevProps, prevState, snapshot)：组件更新后调用，可以在这个方法中进行网络请求等操作。
+>
+> **Unmounting 阶段**
+>
+> 1. componentWillUnmount()：组件卸载时调用，可以在这个方法中清除定时器、取消网络请求等操作。
+
+
+
+#### react中副作用指的是什么？
+
+> 任何影响组件状态的行为，包括但不限于：
+>
+> 1. 修改组件内部状态（使用 `useState`）
+> 2. 发送网络请求（使用 `fetch`、`axios` 等）。
+> 3. 订阅事件（使用 `addEventListener`）。
+> 4. 操作 DOM 元素（使用 `document.querySelector` 等）。
+> 5. 设置定时器（使用 `setTimeout`、`setInterval` 等）。
+>
+> 只用**useEffect**对进行处理
