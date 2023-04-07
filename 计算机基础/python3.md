@@ -101,3 +101,29 @@
 #### 参考
 
 [python常用模版](https://blog.csdn.net/Shenpibaipao/article/details/105873407)
+
+
+
+### :open_book: 基础语法知识
+
+#### python的package包
+
+python中每个目录都可以作为一个包来看待，包内通常会包含一个名为`__init__.py`的文件，这个文件是包的入口点，其作用有：
+
+1. 指示python解释器该目录是一个python包，如果目录中不包含`__init__.py`，则python解释器不会把它看成一个包，就无法通过import语句引入包内的模块
+2. 可以在`__init__.py`文件中定义包级别的变量和函数，使其它模块能哦股访问这些函数和变量
+3. 可以在`__init__.py`文件导入该包需要使用的模块，使得在使用该包时候，可以直接通过包名访问该包中的模块
+4. 导入该模块的时候会自动执行`__init__.py`文件
+
+```python
+my_package/
+	__init__.py
+  module1.py
+  module2.py
+  
+# __init__.py
+from .module1 import some_function
+from .module2 import some_tool
+```
+
+然后可以直接在其他的模块中是使用`my_package.some_function`
