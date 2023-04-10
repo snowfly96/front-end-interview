@@ -88,13 +88,31 @@
 >
 > capitalize 将首字母大写、其余小写
 >
-> replace(old,new) 字符替换
+> replace(old,new,count) 字符替换，**表示替换几个**，不设置表示全部替换
 >
 > “xx”.join(iterable) 将可迭代对象拼接成字符串
 >
 > lower()/upper() 返回一个副本， 将所有字符串转化为小写或者大写
 >
 > Isdigit()/isalnum()/isalpha()
+
+#### 数组操作
+
+> Append(obj) 末尾添加
+>
+> Insert(index,obj) 在index位置插入
+>
+> pop(index=-1) index位置删除，默认末尾删除
+>
+> Remove(obj) 移除某个值第一个匹配项
+>
+> Reveres() 数组反向
+>
+> sort() 列表排序
+>
+> Count(obj) 某个元素出现次数
+>
+> Extend(seq) 往一个列表中追加列表
 
 
 
