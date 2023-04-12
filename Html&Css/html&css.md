@@ -60,7 +60,7 @@
 #### px与rem？
 
 > px 绝对的单位，根据页面像素进行计算
-> rem 相对单位，根据其父节点的font-size进行计算
+> rem/e m 相对单位，em根据其父节点的font-size进行计算，rem根据根节点的font-size进行计算的
 
 #### 垂直居中？
 
