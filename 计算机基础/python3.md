@@ -106,7 +106,7 @@
 >
 > Remove(obj) 移除某个值第一个匹配项
 >
-> Reveres() 数组反向
+> Reverse() 数组反向
 >
 > sort() 列表排序
 >
