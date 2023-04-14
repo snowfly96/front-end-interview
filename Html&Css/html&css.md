@@ -13,7 +13,13 @@
 
 > DOM模型是对html文档的抽象，将html结构抽象为一棵逻辑树，树中每个节点表示文档中一个元素。DOM模型给js提供操作文档的编程接口
 
+#### script中的async和defer
 
+> 浏览器加载html的时候会遇到script标签，浏览器必须等待script加载完毕之后再进行加载，会出现阻塞页面的问题
+>
+> defer和async采用异步的方式，告诉浏览器立即加载，但是不阻塞后续页面的加载
+>
+> defer是会保持相对顺序的，async不会保持相对顺序，哪个先加载完毕哪个先运行
 
 ###  :pen: CSS
 
@@ -80,3 +86,7 @@
 > [B站链接](https://www.bilibili.com/video/BV1ni4y1g7tc/?spm_id_from=333.337.search-card.all.click&vd_source=084728306193898208d80f40ece2975b)
 
 #### css的margin？
+
+#### css的position？
+
+> https://www.ruanyifeng.com/blog/2019/11/css-position.html
