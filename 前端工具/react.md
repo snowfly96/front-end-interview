@@ -2,7 +2,91 @@
 
 #### 什么是react？
 
-> react是facebook开发的一个用于构建用户界面的开源javasctipt库，能够帮助用户更快的构建交互式UI
+> react是facebook开发的一个用于构建用户界面的开源javasctipt库（采用的是jsx语法），能够帮助用户更快的构建交互式UI
+>
+> **组件化**
+>
+> + 类组件
+>
+>   经典组件/ES5组件
+>
+>   > + 状态：存储在this.state中，状态是一个可变的对象，状态的变化可以使得react重新渲染页面（this.setState来进行修改状态-需要进行重新渲染，所以需要在this.setState()内部来运行render()函数对组件进行重新渲染）
+>   >
+>   > + 生命周期方法：挂载/更新/卸载
+>   >
+>   >   + Constructor 
+>   >
+>   > + 渲染方法：每个组件必须实现一个render方法，返回一个react元素或者null值
+>   >
+>   > + props属性：类似于函数的参数，父组件通过props将数据传递给子组件，维护一个单向的数据流
+>   >
+>   >   + 子组件通过this.prop获取父组件传递过来的消息
+>   >
+>   >   + 子组件给父组件传递消息，需要采用回调函数的形式进行传递
+>   >
+>   >     > 父组件中：
+>   >     >
+>   >     > handleMessage(message) {    console.log(message);  }
+>   >     >
+>   >     > <ChildComponent onMessage={this.handleMessage} />
+>   >     >
+>   >     > 子组件中：
+>   >     >
+>   >     > handleClick() {    this.props.onMessage('Hello, Parent!');  }
+>   >     >
+>   >     > \<button onClick={this.handleClick}>Click me</button>
+>
+> + 函数组件
+>
+>   > 函数组件是一个纯函数，接收一些属性作为输入，返回一个react元素
+>   >
+>   > + 没有状态，没有实例
+>   >
+>   > + 通过props形式参数进行数据传递，通过钩子函数维护状态useState()
+>   >
+>   > + 采用钩子函数实现类组件的功能
+>   >
+>   >   > useState() 维护状态
+>   >   >
+>   >   > useEffect() 实现副作用，异步操作-异步请求/io操作/事件处理
+>   >   >
+>   >   > useContext() 使用上下文来实现组件之间共享状态
+>   >   >
+>   >   > useReducer：react本身不提供状态管理，通常需要引入外部库redux
+>
+> + 高阶组件
+>
+>   > 本身是一个函数，接收一个组件作为参数，并返回一个新的组件
+>   >
+>   > 实际应用：
+>   >
+>   > + 给表单添加逻辑处理
+>   > + 给组件添加日志记录
+>   > + 进行条件渲染等等
+>
+> **单向数据流**
+>
+> > react使用单向数据流来管理组件之间的数据交互，通过props将数据从父组件传递到子组件
+>
+> **虚拟DOM**
+>
+> > react采用虚拟的DOM技术来提高性能和用户体验，虚拟DOM是内存中的数据结构，能够在UI中的组件状态发生变化时快速对比前后的状态，找出差异并只更新需要更新的部分，避免整个页面的重新渲染
+> >
+> > + diff算法步骤
+> >   + 当更新一个组件的时候，首先创建一棵新的dom树
+> >   + 比较新树和旧树之间的差异
+> >   + 对于两个不同节点，将会被视为不同的树，删除旧节点用新节点替换
+> >   + 对与两个相同的节点，更新节点的属性，
+> >   + 如果两个相同节点有不同的子节点，react递归的更新其子节点
+> >   + 比较完成后，将需要更新的节点打上标记，然后进行实际的DOM操作，更新程序的应用界面
+>
+> **生态丰富**
+>
+> + redux：提供状态管理
+> + router：提供但页面应用的路由
+> + axios：提供一个发起http请求的js库
+> + material-ui：构建react组件的ui组件库
+> + styled components：用于构建样式化react组件库
 
 #### react的特点？
 
@@ -76,13 +160,15 @@
 
 #### 受控组件和非受控组件？
 
-> 受控组件
+> 通常在处理表单元素的时候input\textarea\select等，有两种渲染方式
+>
+> 受控组件（react来管理组件的状态）
 >
 > 1. 没有维持自己的状态
 > 2. 数据由父组件控制
 > 3. 通过props获取当前的值
 >
-> 非受控组件
+> 非受控组件（dom自己管理组件的状态）
 >
 > 1. 保持自己的状态
 > 2. 数据由DOM控制
@@ -171,10 +257,10 @@
 > 任何影响组件状态的行为，包括但不限于：
 >
 > 1. 修改组件内部状态（使用 `useState`）
-> 2. 发送网络请求（使用 `fetch`、`axios` 等）。
-> 3. 订阅事件（使用 `addEventListener`）。
-> 4. 操作 DOM 元素（使用 `document.querySelector` 等）。
-> 5. 设置定时器（使用 `setTimeout`、`setInterval` 等）。
+> 2. 发送网络请求（使用 `fetch`、`axios` 等）
+> 3. 订阅事件（使用 `addEventListener`）
+> 4. 操作 DOM 元素（使用 `document.querySelector` 等）
+> 5. 设置定时器（使用 `setTimeout`、`setInterval` 等）
 >
 > 只用**useEffect**对进行处理
 
@@ -190,3 +276,67 @@
 > 4. 生命周期：Vue和React都有各自的生命周期函数，但是它们的执行顺序不同。Vue的生命周期函数是按照一定的顺序执行的，而React的生命周期函数则是按需执行的。
 > 5. 模块化：Vue和React都支持模块化开发。但是Vue的模块化开发更为简单，因为它内置了模块化开发的支持，而React需要通过工具链来实现模块化开发。
 > 6. 性能：Vue和React都使用虚拟DOM来优化性能，但是Vue使用的是模板编译，它在组件实例化时会生成渲染函数，这样可以避免在运行时进行模板编译，从而提高性能。React则使用JSX语法，在组件渲染时会先将JSX语法转换为虚拟DOM对象，这样可以在比较虚拟DOM树时进行优化，从而提高性能。
+
+
+
+#### 受控组件与非受控组件
+
+> 在 React 中，表单元素（例如 `<input>`、`<textarea>` 和 `<select>`）有两种渲染方式：受控组件和非受控组件。
+>
+> 1. 受控组件：
+>
+> 受控组件是由 React 组件负责控制表单元素的值和状态。当用户输入内容时，React 组件会更新组件的状态，并将新的值传递给表单元素。这样，表单元素的值和 React 组件的状态始终保持同步。
+>
+> 例如，下面的代码展示了一个受控的文本输入框：
+>
+> ```js
+> jsxCopy code
+> import React, { useState } from 'react';
+> 
+> function MyComponent() {
+>   const [value, setValue] = useState('');
+> 
+>   const handleChange = (event) => {
+>     setValue(event.target.value);
+>   };
+> 
+>   return (
+>     <div>
+>       <input type="text" value={value} onChange={handleChange} />
+>       <p>The value is: {value}</p>
+>     </div>
+>   );
+> }
+> ```
+>
+> 在上面的例子中，我们使用 `useState` 创建了一个名为 `value` 的状态。我们将 `value` 的值设置为文本输入框的值，并使用 `handleChange` 函数来更新 `value` 的值。每次用户输入内容时，React 组件都会重新渲染，并将新的值传递给文本输入框。
+>
+> 1. 非受控组件：
+>
+> 非受控组件是由 DOM 自身管理表单元素的状态。React 组件可以访问表单元素的值，但不能控制其状态。
+>
+> 例如，下面的代码展示了一个非受控的文本输入框：
+>
+> ```js
+> jsxCopy code
+> import React from 'react';
+> 
+> function MyComponent() {
+>   const inputRef = React.createRef();
+> 
+>   const handleClick = () => {
+>     console.log(inputRef.current.value);
+>   };
+> 
+>   return (
+>     <div>
+>       <input type="text" ref={inputRef} />
+>       <button onClick={handleClick}>Get value</button>
+>     </div>
+>   );
+> }
+> ```
+>
+> 在上面的例子中，我们使用 `React.createRef` 创建了一个名为 `inputRef` 的引用。我们将 `inputRef` 的值设置为文本输入框的引用，并使用 `handleClick` 函数来获取文本输入框的值。每次用户输入内容时，文本输入框的状态都由 DOM 自身管理，React 组件只是获取文本输入框的值。
+>
+> 总的来说，受控组件和非受控组件都有各自的优点和缺点。受控组件更加灵活，可以轻松地进行表单验证和处理复杂的表单逻辑。非受控组件则更加简单和直接，适用于一些简单的表单场景。开发者可以根据实际需要选择适合自己的方式。
