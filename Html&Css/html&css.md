@@ -46,6 +46,10 @@
 #### css 层叠？
 
 > 通过z-index：按照z轴从上至下排列
+>
+> `z-index` 属性只对定位元素（即 `position` 属性值为 `relative`、`absolute` 或 `fixed` 的元素）起作用，对于非定位元素和使用 `float` 属性的元素，`z-index` 属性没有效果。
+>
+> 脱离文档流的元素默认后面覆盖前面，可以通过设置`z-index`来修改它们的层级关系
 
 #### css 优先级？
 
@@ -89,4 +93,12 @@
 
 #### css的position？
 
-> https://www.ruanyifeng.com/blog/2019/11/css-position.html
+> [阮一峰老师博客](https://www.ruanyifeng.com/blog/2019/11/css-position.html)
+>
+> [sticky定位](https://www.zhangxinxu.com/wordpress/2018/12/css-position-sticky/)
+
+
+
+#### 三十天练习
+
+[github小项目](https://github.com/wesbos/JavaScript30)

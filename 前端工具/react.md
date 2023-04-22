@@ -82,7 +82,7 @@
 >
 > **生态丰富**
 >
-> + redux：提供状态管理
+> + redux/mobx：提供状态管理
 > + router：提供但页面应用的路由
 > + axios：提供一个发起http请求的js库
 > + material-ui：构建react组件的ui组件库
@@ -340,3 +340,35 @@
 > 在上面的例子中，我们使用 `React.createRef` 创建了一个名为 `inputRef` 的引用。我们将 `inputRef` 的值设置为文本输入框的引用，并使用 `handleClick` 函数来获取文本输入框的值。每次用户输入内容时，文本输入框的状态都由 DOM 自身管理，React 组件只是获取文本输入框的值。
 >
 > 总的来说，受控组件和非受控组件都有各自的优点和缺点。受控组件更加灵活，可以轻松地进行表单验证和处理复杂的表单逻辑。非受控组件则更加简单和直接，适用于一些简单的表单场景。开发者可以根据实际需要选择适合自己的方式。
+
+
+
+#### 路由
+
+> 路由主要有hash路由模式和history路由模式
+>
+> hash模式是url中以#号分割的部分
+>
+> + http://example.com/#/home
+>
+> + 在hash模式下，**#号后面的部分被浏览器认为是页面内的一个锚点**，不会向服务器发送请求，通过js监听浏览器的hashchange事件，根据url中的hash值来切换页面的内容，实现单页面应用
+>
+>   ```html
+>   <h2>
+>     <a href="#div1">to div1</a>
+>     <a href="#div2">to div2</a>
+>     <a href="#div3">to div3</a>
+>   </h2>
+>   <div id="div1">div1</div>
+>   <div id="div2">div2</div>
+>   <div id="div3">div3</div>
+>   ```
+>
+>   
+>
+> history模式
+>
+> + url不包含#号部分
+> + 前端路由通过html5的history来实现有人了的改变和页面的跳转，url的改变会向服务器发送请求，因此需要对后端进行相应的配置
+>
+> 相对于hash模式，history模式的url更加直观和友好，可以支持浏览器的前进和后退
