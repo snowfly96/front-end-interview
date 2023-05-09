@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 默认配置
+    axios.defaults.method = 'GET'
+    axios.defaults.baseURL = 'http://localhost:3000'
+    // axios.defaults.params = { id: 1 }
+    axios.defaults.timeout = 3000
+
+    // 拦截器
+    axios.interceptors.request.use(function (config) {
+        config.params = { id: 2 }
+        return config
+    })
+    axios.interceptors.response.use(function (response) {
+        return response
+    })
+    // cancelToken 配置请求取消
+
+    // request/post/get 请求
+    axios({
+        url: '/posts',
+        data: {
+            name: "snow"
+        }
+    }).then(val => {
+        console.log(val)
+        console.log(val.data)
+    })
+</script>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="Promise实现(函数).js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+    const p = new _Promise((resolve, reject) => {
+        // setTimeout(() => {
+        //     resolve('OK')
+        // }, 1000)
+        resolve('OK')
+        // throw "error"
+    })
+    p.then(val => {
+        console.log(val)
+        // throw 'error'
+    }, err => {
+        console.log(err)
+    }).then(val => {
+        console.log(val)
+    }, err => {
+        console.log(err)
+    })
+    console.log("end");
+</script>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /* 发送请求步骤 xhr+promise
+        1. 创建构造函数
+        2. 实现request方法
+        3. request借助dispatchRequest发送请求
+        4. dispatchRequest内部调用xhr和http适配器实现请求发送
+     */
+    // 1. 创建构造函数
+    function _Axios (config) {
+        this.defaults = config
+        this.interceptors = {
+            request: {},
+            response: {}
+        }
+    }
+    _Axios.prototype.get = function (config) {
+        console.log("get:" + config.method)
+    }
+    _Axios.prototype.post = function (config) {
+        console.log("post:" + config.method)
+    }
+    function createInstance (config) {
+        const context = new _Axios(config)
+        // instance 本身就是一个和request的一样的函数，只是内部this指向context
+        const instance = _Axios.prototype.request.bind(context) // 可以 instance({})
+        Object.keys(_Axios.prototype).forEach(key => {
+            instance[key] = _Axios.prototype[key].bind(context)
+        })
+        Object.keys(context).forEach(key => {
+            instance[key] = context[key]
+        })
+        return instance
+    }
+    // 2. 实现request函数
+    _Axios.prototype.request = function (config) {
+        // console.log("request:" + config.method)
+        const promise = Promise.resolve(config)
+        // 声明一个数组
+        const chain = [dispatchRequest, undefined]
+        const result = promise.then(chain[0], chain[1])
+        return result
+    }
+    // 3. 实现dispatchRequest函数
+    function dispatchRequest (config) {
+        return xhrAdapter(config).then(response => {
+            return response
+        }, err => {
+            throw err
+        })
+    }
+    // 4. 实现xhr适配器
+    function xhrAdapter (config) {
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest()
+            xhr.open(config.method, config.url)
+            xhr.send()
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    if ((this.status >= 200 && this.status < 300) || this.status === 304) {
+                        resolve({
+                            config: config,
+                            data: this.response,
+                            header: this.getAllResponseHeaders(),
+                            request: this,
+                            status: this.status,
+                            statusText: this.statusText
+                        })
+                    } else {
+                        reject(new Error("error: " + this.status))
+                    }
+                }
+            }
+        })
+    }
+
+
+    const _axios = createInstance()
+    _axios({ method: 'GET', url: 'http://localhost:3000/posts' }).then(response => {
+        console.log(response)
+    }, err => {
+        console.log(err)
+    })
+
+    // _axios.request({ method: 'GET' })
+    // _axios.get({ method: 'GET' })
+    // _axios.post({ method: 'POST' })
+
+</script>
+
+</html>

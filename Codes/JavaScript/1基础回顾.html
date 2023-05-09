@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
 </body>
 <script type="text/javascript">
@@ -18,20 +20,20 @@
     //     typeof：typeof xxx 返回一个字符串 
     //             不能判断null和object，object和array类型
     // 函数的执行和调用直接加括号
-    var b1={
-        b2:[1,"ab",console.log],
-        b3:function () {
-            console.log("hello");
+    var b1 = {
+        b2: [1, "ab", console.log],
+        b3: function () {
+            console.log("hello")
         }
     }
-    console.log(b1 instanceof Object,b1 instanceof Array);
-    console.log(b1.b2 instanceof Object,b1.b2 instanceof Array);
-    console.log(b1.b3 instanceof Object,b1.b3 instanceof Function);
+    console.log(b1 instanceof Object, b1 instanceof Array)
+    console.log(b1.b2 instanceof Object, b1.b2 instanceof Array)
+    console.log(b1.b3 instanceof Object, b1.b3 instanceof Function)
 
-    console.log(typeof b1.b3==="function");
-    console.log(typeof b1.b2[2]==="function");
+    console.log(typeof b1.b3 === "function")
+    console.log(typeof b1.b2[2] === "function")
     console.log(typeof b1.b2);
 
-    
 </script>
+
 </html>

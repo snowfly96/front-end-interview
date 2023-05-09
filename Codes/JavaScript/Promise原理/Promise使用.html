@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    const getJSON = function (url, successed, failed) {
+        const handler = function () {
+            if (this.readyState !== 4) {
+                return
+            }
+            if (this.status === 200) {
+                successed(this.response)
+            } else {
+                failed(new Error(this.statusText))
+            }
+        }
+        const client = new XMLHttpRequest()
+        client.open("GET", url)
+        client.onreadystatechange = handler
+        client.responseType = "json"
+        client.setRequestHeader("Accept", "application/json")
+        client.send()
+    }
+
+    const promise = new Promise(function (resolve, reject) {
+        getJSON("hello.json", resolve, reject)
+    }).then(function (json) {
+        console.log(json)
+    }, function (err) {
+        console.error(err)
+    })
+
+    const promise1 = new Promise(function (resolve, reject) {
+        getJSON("hello.json", resolve, reject)
+    })
+    const promise2 = new Promise(function (resolve, reject) {
+        getJSON("hello2.json", resolve, reject)
+    })
+    // 所有结束再处理
+    Promise.all([promise1, promise2])
+        .then(function (json) {
+            console.log(json)
+        }).catch(function (err) {
+            console.log(err)
+        })
+    // 只要有一个就会处理
+    Promise.race([promise1, promise2])
+        .then(function (json) {
+            console.log(json)
+        })
+</script>
+
+</html>

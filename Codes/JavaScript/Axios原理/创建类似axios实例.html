@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /* js一切皆对象 */
+    function _Axios (config) {
+        this.defaults = config
+        this.interceptors = {
+            request: null,
+            response: null
+        }
+    }
+    _Axios.prototype.request = function () {
+        console.log("request")
+    }
+    _Axios.prototype.post = function () {
+        console.log("post")
+    }
+    _Axios.prototype.get = function () {
+        console.log("get")
+    }
+
+    function createInstance (config) {
+        const context = new _Axios(config)
+        const instance = _Axios.prototype.request.bind(context) // instance 是一个函数 this内部的this是_Axios的context实例 此时 instance 不能 instance.get X
+        // 为instance添加_Axios的原型方法
+        Object.keys(_Axios.prototype).forEach(key => {
+            instance[key] = _Axios.prototype[key].bind(context)
+        })
+        // 为instance添加context实例方法
+        Object.keys(context).forEach(key => {
+            instance[key] = context[key]
+        })
+        return instance
+    }
+
+    const _axios = createInstance({})
+    console.dir(_axios);
+</script>
+
+</html>
